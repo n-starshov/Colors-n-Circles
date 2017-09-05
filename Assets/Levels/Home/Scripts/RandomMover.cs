@@ -14,11 +14,11 @@ public class RandomMover : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Vector3 position = new Vector3(
-			Random.Range(randomPosition.xMin, randomPosition.xMax), 
-			Random.Range(randomPosition.yMin, randomPosition.yMax),
-			0.0f
-		);
+//		Vector3 position = new Vector3(
+//			Random.Range(randomPosition.xMin, randomPosition.xMax), 
+//			Random.Range(randomPosition.yMin, randomPosition.yMax),
+//			0.0f
+//		);
 //		transform.position = position;
 
 		rb = GetComponent<Rigidbody>();

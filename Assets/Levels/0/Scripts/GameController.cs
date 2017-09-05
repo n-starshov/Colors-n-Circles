@@ -20,28 +20,28 @@ public class GameController : MonoBehaviour {
 	private int currentCountEnemies;
 
 
-	void Start(){
-		startGameText = GameObject.Find("StartGameText").GetComponent<Text>();
-		startGameText.text = "Press Space to Start";
+	void Awake(){
+//		startGameText = GameObject.Find("StartGameText").GetComponent<Text>();
+//		startGameText.text = "Press Space to Start";
 
 		scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
 		scoreText.text = "0";
 
 		player = GameObject.FindGameObjectWithTag("Player");
-		player.SetActive(false);
+		player.SetActive(true);
 
+		spawnEnemyRandomly(10);
+		goToPlay = true;
 		isGameOver = false;
-		goToPlay = false;
 	}
 
 
 	void Update(){
-		if (Input.GetKey(KeyCode.Space) && !goToPlay) {
-			startGameText.text = "";
-			player.SetActive(true);
-			spawnEnemyRandomly(10);
-			goToPlay = true;
-		}
+//		if (Input.GetKey(KeyCode.Space) && !goToPlay) {
+//			startGameText.text = "";
+//			player.SetActive(true);
+			
+//		}
 
 		if (isGameOver) {
 			SceneManager.LoadScene(0);

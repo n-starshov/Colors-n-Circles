@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 	private bool isDead, isChangingWeapon;
 	private Vector3 radius;
 	private SpriteRenderer spriteRender;
+	private Color playerColor;
 
 
 	void Start(){
@@ -49,13 +50,20 @@ public class PlayerController : MonoBehaviour {
 		nextFire = 0;
 		currentHealth = startingHealth;
 		radius = new Vector3(startingHealth, startingHealth, 1.0f);
-		backgroundHealth.transform.localScale = Vector3.zero;
+		backgroundHealth.transform.localScale = radius;
 		spriteRender = GetComponent<SpriteRenderer>();
+
+		playerColor = spriteRender.color;
+		playerColor.a = 0.0f;
+		spriteRender.color = playerColor;
 	}
 
 	void Update(){
-		if (!isChangingWeapon)
-			ChangeWeapon();
+		playerColor = spriteRender.color;
+		playerColor.a = Mathf.Lerp (spriteRender.color.a, 1.0f, Time.deltaTime);
+		spriteRender.color = playerColor;
+
+//		spriteRender.color.a = Mathf.Lerp (spriteRender.color.a, 1.0f, lerpSpeed);
 	}
 
 	void FixedUpdate (){
@@ -68,6 +76,8 @@ public class PlayerController : MonoBehaviour {
 		Turn();
 		Fire();
 
+		if (!isChangingWeapon)
+			ChangeWeapon();
 	}
 
 
