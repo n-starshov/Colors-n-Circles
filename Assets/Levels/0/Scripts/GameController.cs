@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
 
 	private GameObject player;
 	private Text startGameText, scoreText;
-	private bool isGameOver, goToPlay;
+	private bool isGameOver; //, goToPlay;
 	private int currentCountEnemies;
 
 
@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour {
 		player.SetActive(true);
 
 		spawnEnemyRandomly(10);
-		goToPlay = true;
+		// goToPlay = true;
 		isGameOver = false;
 	}
 

@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour {
 	public AudioClip deathEnemyClip;
 
 
-//	private Rigidbody2D rb;
+	private Rigidbody2D rb;
 	private GameObject player, gameController;
 	private bool isDead, playerInRange;
 	private PlayerController playerController;
@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour {
 	// Use this for initialization
 	void Start(){
 
-//		rb = GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody2D>();
 
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerController = player.GetComponent<PlayerController>();
@@ -57,7 +57,9 @@ public class EnemyController : MonoBehaviour {
 
 		float offset = 1.5f;
 		if (Vector3.Distance(transform.position, playerTransform.position) > offset) {
-			transform.position = Vector3.Lerp(transform.position, playerTransform.position, speed * Time.deltaTime);
+			var pos = playerTransform.position;
+			pos.z = 1;
+			transform.position = Vector3.Lerp(transform.position, pos, speed * Time.deltaTime);
 		}
 
 //		rb.AddForce(Random.insideUnitSpheres);

@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
 		weaponIndex = 0;
 		nextFire = 0;
 		currentHealth = startingHealth;
-		radius = new Vector3(startingHealth, startingHealth, 1.0f);
+		radius = new Vector3(startingHealth, startingHealth, 0.0f);
 		backgroundHealth.transform.localScale = radius;
 		spriteRender = GetComponent<SpriteRenderer>();
 
@@ -62,8 +62,6 @@ public class PlayerController : MonoBehaviour {
 		playerColor = spriteRender.color;
 		playerColor.a = Mathf.Lerp (spriteRender.color.a, 1.0f, Time.deltaTime);
 		spriteRender.color = playerColor;
-
-//		spriteRender.color.a = Mathf.Lerp (spriteRender.color.a, 1.0f, lerpSpeed);
 	}
 
 	void FixedUpdate (){
