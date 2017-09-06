@@ -12,11 +12,6 @@ public class BulletController : MonoBehaviour {
 	public int damage;
 
 
-	void Start(){
-//		isKinematic = false;
-	}
-
-
 	void Update () {
 		Vector3 movement = transform.up * speed;
 		transform.position += movement * Time.deltaTime;

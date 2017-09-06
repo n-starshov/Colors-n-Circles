@@ -12,17 +12,22 @@ public class GameController : MonoBehaviour {
 
 	public GameObject[] enemies;
 	public int countEnemies;
+	public Vector3 endOfGameBGHealthScale;
 
 
-	private GameObject player;
-	private Text startGameText, scoreText;
-	private bool isGameOver; //, goToPlay;
+	private GameObject player, backgroundHealth;
+	private Text endText, scoreText;
+	private Color textColor;
 	private int currentCountEnemies;
+	private bool isGameOver;
 
 
 	void Awake(){
-//		startGameText = GameObject.Find("StartGameText").GetComponent<Text>();
-//		startGameText.text = "Press Space to Start";
+		endText = GameObject.Find("EndText").GetComponent<Text>();
+		endText.text = "";
+		var color = endText.color;
+		color.a = 0.0f;
+		endText.color = color;
 
 		scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
 		scoreText.text = "0";
@@ -30,21 +35,28 @@ public class GameController : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 		player.SetActive(true);
 
-		spawnEnemyRandomly(10);
-		// goToPlay = true;
+		backgroundHealth = GameObject.Find("BackgroundHealth");
+
+
+		spawnEnemyRandomly(8);
 		isGameOver = false;
 	}
 
 
 	void Update(){
-//		if (Input.GetKey(KeyCode.Space) && !goToPlay) {
-//			startGameText.text = "";
-//			player.SetActive(true);
-			
-//		}
-
+		
 		if (isGameOver) {
-			SceneManager.LoadScene(0);
+			endText.text = "Score:\n" + scoreText.text;
+
+			backgroundHealth.transform.localScale = Vector3.Lerp (backgroundHealth.transform.localScale, endOfGameBGHealthScale, 0.2f * Time.deltaTime);
+
+			var color = scoreText.color;
+			color.a = Mathf.Lerp(color.a, 0.0f, Time.deltaTime);
+			scoreText.color = color;
+
+			color = endText.color;
+			color.a = Mathf.Lerp(color.a, 1.0f, Time.deltaTime);
+			endText.color = color; 
 		}
 	}
 
@@ -76,5 +88,11 @@ public class GameController : MonoBehaviour {
 
 	public void GameOver(){
 		isGameOver = true;
+		foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Blue")){
+			enemy.SetActive(false);
+		}
+		foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Red")){
+			enemy.SetActive(false);
+		}
 	}
 }

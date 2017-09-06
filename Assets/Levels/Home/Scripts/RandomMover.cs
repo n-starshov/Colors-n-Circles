@@ -12,15 +12,8 @@ public class RandomMover : MonoBehaviour {
 
 	private Rigidbody rb;
 
-	// Use this for initialization
-	void Start () {
-//		Vector3 position = new Vector3(
-//			Random.Range(randomPosition.xMin, randomPosition.xMax), 
-//			Random.Range(randomPosition.yMin, randomPosition.yMax),
-//			0.0f
-//		);
-//		transform.position = position;
 
+	void Start () {
 		rb = GetComponent<Rigidbody>();
 		Vector2 randomDirection = new Vector2(
 			Random.Range(-speed, speed), 
@@ -42,10 +35,7 @@ public class RandomMover : MonoBehaviour {
 				vel.x *= -1.0f;
 				rb.velocity = vel;
 			} else {
-//				Vector3 vel = other.gameObject.GetComponent<Rigidbody>().velocity;
-				rb.velocity *= -1; //Vector3.Lerp(rb.velocity, vel, 1.0f);
-//				rb.velocity = rb.velocity - other.gameObject.GetComponent<Rigidbody>().velocity;
-//				other.gameObject.GetComponent<Rigidbody>().velocity = other.gameObject.GetComponent<Rigidbody>().velocity - rb.velocity;
+				rb.velocity *= -1;
 			} 
 		}	
 	}

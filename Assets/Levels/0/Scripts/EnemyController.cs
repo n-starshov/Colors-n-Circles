@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour {
 	private Vector3 radius;
 	private float timer;
 
-	// Use this for initialization
+
 	void Start(){
 
 		rb = GetComponent<Rigidbody2D>();
@@ -61,8 +61,6 @@ public class EnemyController : MonoBehaviour {
 			pos.z = 1;
 			transform.position = Vector3.Lerp(transform.position, pos, speed * Time.deltaTime);
 		}
-
-//		rb.AddForce(Random.insideUnitSpheres);
 
 		timer += Time.deltaTime;
 		if (playerInRange && timer >= attackRate) {

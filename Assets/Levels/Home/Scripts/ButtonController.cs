@@ -18,16 +18,15 @@ public class ButtonController : MonoBehaviour {
 	private bool isButtonOn;
 	private Color transparencyColor;
 
-	// Use this for initialization
+
 	void Start(){
 		isButtonOn = false;
-//		radius = transform.localScale;
 		stopScale = new Vector3(finalScale.x * 0.75f, finalScale.y * 0.75f, 1);
 		transparencyColor = textOnButton.GetComponent<Text> ().color;
 		transparencyColor.a = 0.0f;
 	}
-	
-	// Update is called once per frame
+
+
 	void Update(){
 		if (isButtonOn){
 			transform.localScale = Vector3.Lerp(

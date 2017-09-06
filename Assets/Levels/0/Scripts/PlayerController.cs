@@ -117,16 +117,10 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetKey("q")) {
 			weaponIndex = 0;
-//			if (weaponIndex < 0) {
-//				weaponIndex = weapons.Length - 1;
-//			}
 			ChangeSprite();
 		}
 		if (Input.GetKey("w")) {
 			weaponIndex = 1;
-//			if (weaponIndex >= weapons.Length) {
-//				weaponIndex = 0;
-//			}
 			ChangeSprite();
 		}
 
@@ -144,8 +138,8 @@ public class PlayerController : MonoBehaviour {
 	void Death(){
 		isDead = true;
 		radius = Vector3.zero;
-		gameObject.SetActive(false);
 		GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GameOver();
+		GameObject.Destroy(gameObject);
 	}
 
 
