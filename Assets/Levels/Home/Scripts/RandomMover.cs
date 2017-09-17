@@ -13,7 +13,7 @@ public class RandomMover : MonoBehaviour {
 	private Rigidbody rb;
 
 
-	void Start () {
+	void Awake() {
 		rb = GetComponent<Rigidbody>();
 		Vector2 randomDirection = new Vector2(
 			Random.Range(-speed, speed), 
@@ -24,7 +24,7 @@ public class RandomMover : MonoBehaviour {
 
 
 	void OnTriggerEnter(Collider other){
-		Debug.Log("Circle Collide!");
+//		Debug.Log("Circle Collide!");
 		if ((other.gameObject.name == "TopBound") || (other.gameObject.name == "BottomBound")) {
 			Vector3 vel = rb.velocity;
 			vel.y *= -1.0f;

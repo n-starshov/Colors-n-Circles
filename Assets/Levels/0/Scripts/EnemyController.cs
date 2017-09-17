@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour {
 	public AudioClip deathEnemyClip;
 
 
-	private Rigidbody2D rb;
+//	private Rigidbody2D rb;
 	private GameObject player, gameController;
 	private bool isDead, playerInRange;
 	private PlayerController playerController;
@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour {
 
 	void Start(){
 
-		rb = GetComponent<Rigidbody2D>();
+//		rb = GetComponent<Rigidbody2D>();
 
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerController = player.GetComponent<PlayerController>();

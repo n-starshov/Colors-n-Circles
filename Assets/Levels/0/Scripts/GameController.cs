@@ -15,19 +15,19 @@ public class GameController : MonoBehaviour {
 	public Vector3 endOfGameBGHealthScale;
 
 
-	private GameObject player, backgroundHealth;
-	private Text endText, scoreText;
+	private GameObject player; //, backgroundHealth;
+	private Text scoreText;// ,endText;
 	private Color textColor;
 	private int currentCountEnemies;
 	private bool isGameOver;
 
 
 	void Awake(){
-		endText = GameObject.Find("EndText").GetComponent<Text>();
-		endText.text = "";
-		var color = endText.color;
-		color.a = 0.0f;
-		endText.color = color;
+//		endText = GameObject.Find("EndText").GetComponent<Text>();
+//		endText.text = "";
+//		var color = endText.color;
+//		color.a = 0.0f;
+//		endText.color = color;
 
 		scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
 		scoreText.text = "0";
@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 		player.SetActive(true);
 
-		backgroundHealth = GameObject.Find("BackgroundHealth");
+//		backgroundHealth = GameObject.Find("BackgroundHealth");
 
 
 		spawnEnemyRandomly(8);
@@ -46,17 +46,18 @@ public class GameController : MonoBehaviour {
 	void Update(){
 		
 		if (isGameOver) {
-			endText.text = "Score:\n" + scoreText.text;
-
-			backgroundHealth.transform.localScale = Vector3.Lerp (backgroundHealth.transform.localScale, endOfGameBGHealthScale, 0.2f * Time.deltaTime);
-
-			var color = scoreText.color;
-			color.a = Mathf.Lerp(color.a, 0.0f, Time.deltaTime);
-			scoreText.color = color;
-
-			color = endText.color;
-			color.a = Mathf.Lerp(color.a, 1.0f, Time.deltaTime);
-			endText.color = color; 
+			SceneManager.LoadScene("HomeScene");
+//			endText.text = "Score:\n" + scoreText.text;
+//
+//			backgroundHealth.transform.localScale = Vector3.Lerp (backgroundHealth.transform.localScale, endOfGameBGHealthScale, 0.2f * Time.deltaTime);
+//
+//			var color = scoreText.color;
+//			color.a = Mathf.Lerp(color.a, 0.0f, Time.deltaTime);
+//			scoreText.color = color;
+//
+//			color = endText.color;
+//			color.a = Mathf.Lerp(color.a, 1.0f, Time.deltaTime);
+//			endText.color = color; 
 		}
 	}
 
@@ -94,5 +95,23 @@ public class GameController : MonoBehaviour {
 		foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Red")){
 			enemy.SetActive(false);
 		}
+
+		// save score to file
+		string filePath = "Score.txt";
+		string[] scores;
+		try{
+			scores = System.IO.File.ReadAllLines(filePath);
+		} catch {
+			scores = new string[1] {"0"};
+		}
+
+		int bestScore = int.Parse(scores[0]);
+		int currentScore = int.Parse(scoreText.text);
+		if (currentScore > bestScore) {
+			bestScore = currentScore;
+		}
+		System.IO.StreamWriter file = new System.IO.StreamWriter(filePath, true);
+		file.WriteLine(bestScore + "\n" + currentScore);
+		file.Close();
 	}
 }
