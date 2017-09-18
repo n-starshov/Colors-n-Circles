@@ -15,16 +15,17 @@ public class RandomMover : MonoBehaviour {
 
 	void Awake() {
 		rb = GetComponent<Rigidbody>();
-		Vector2 randomDirection = new Vector2(
+		Vector3 randomDirection = new Vector3(
 			Random.Range(-speed, speed), 
-			Random.Range(-speed, speed)
+			Random.Range(-speed, speed),
+			0.0f
 		); 
 		rb.velocity = randomDirection;
 	}
 
 
 	void OnTriggerEnter(Collider other){
-//		Debug.Log("Circle Collide!");
+		Debug.Log(gameObject.name + " collide with " + other.gameObject.name);
 		if ((other.gameObject.name == "TopBound") || (other.gameObject.name == "BottomBound")) {
 			Vector3 vel = rb.velocity;
 			vel.y *= -1.0f;
