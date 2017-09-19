@@ -12,17 +12,19 @@ public class StopCircleForAWhile : MonoBehaviour {
 	private float timer;
 
 	// Use this for initialization
-	void Start () {
+	void Start(){
 		oldVelocity = GetComponent<Rigidbody>().velocity;
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		timer = 0.0f;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update(){
 		timer += Time.deltaTime;
 		if (timer >= stopTime) {
 			GetComponent<Rigidbody>().velocity = oldVelocity;
+			this.enabled = false;
 		}
+
 	}
 }

@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate (){
 		backgroundHealth.transform.localScale = Vector3.Lerp(backgroundHealth.transform.localScale, radius, lerpSpeed * Time.deltaTime);
 
-		movementInputValue = Input.GetAxisRaw("Vertical");
+		movementInputValue = //Input.GetAxisRaw("Vertical");
 		turnInputValue = Input.GetAxisRaw("Horizontal");
 
 		Move();
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	private void Fire(){
-		if (Input.GetButton("Fire1") && (Time.time > nextFire)){
+		if (Time.time > nextFire){
 			nextFire = Time.time + fireRate;
 			Instantiate(weapons[weaponIndex].bullet, shotSpawn.transform.position, shotSpawn.transform.rotation);
 			GetComponent<AudioSource>().PlayOneShot(shotClip);
