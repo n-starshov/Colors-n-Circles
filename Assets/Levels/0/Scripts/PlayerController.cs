@@ -4,6 +4,7 @@ using UnityEngine;
 //using NUnit.Framework.Internal;
 using System;
 using System.ComponentModel;
+using UnityStandardAssets.CrossPlatformInput;
 
 [System.Serializable]
 public class Boundary{
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour {
 
 	private Rigidbody rb;
 	private float movementInputValue, turnInputValue;
+	bool fireInputValue, changeInputValue;
 	private int weaponIndex;
 	private float nextFire;
 	private bool isDead, isChangingWeapon;
@@ -67,8 +69,10 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate (){
 		backgroundHealth.transform.localScale = Vector3.Lerp(backgroundHealth.transform.localScale, radius, lerpSpeed * Time.deltaTime);
 
-		movementInputValue = //Input.GetAxisRaw("Vertical");
-		turnInputValue = Input.GetAxisRaw("Horizontal");
+		movementInputValue = CrossPlatformInputManager.GetAxisRaw("Vertical");
+		turnInputValue = CrossPlatformInputManager.GetAxisRaw("Horizontal");
+		fireInputValue = CrossPlatformInputManager.GetButton("Fire");
+		changeInputValue = CrossPlatformInputManager.GetButtonDown("Change");
 
 		Move();
 		Turn();
@@ -100,7 +104,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	private void Fire(){
-		if (Time.time > nextFire){
+		if (fireInputValue && (Time.time > nextFire)){
 			nextFire = Time.time + fireRate;
 			Instantiate(weapons[weaponIndex].bullet, shotSpawn.transform.position, shotSpawn.transform.rotation);
 			GetComponent<AudioSource>().PlayOneShot(shotClip);
