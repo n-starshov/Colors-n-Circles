@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	public float fireRate;
 	public GameObject shotSpawn;
 	public Weapon[] weapons;
+	public int countOfWeapon; // count of weapon for player at the current moment. 1-baze index
 	public float lerpSpeed;
 	public GameObject backgroundHealth;
 	public AudioClip shotClip;
@@ -77,9 +78,7 @@ public class PlayerController : MonoBehaviour {
 		Move();
 		Turn();
 		Fire();
-
-		if (!isChangingWeapon)
-			ChangeWeapon();
+		ChangeWeapon();
 	}
 
 
@@ -104,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	private void Fire(){
-		if (fireInputValue && (Time.time > nextFire)){
+		if (fireInputValue && (Time.time > nextFire)  && !isChangingWeapon){
 			nextFire = Time.time + fireRate;
 			Instantiate(weapons[weaponIndex].bullet, shotSpawn.transform.position, shotSpawn.transform.rotation);
 			GetComponent<AudioSource>().PlayOneShot(shotClip);
@@ -113,23 +112,22 @@ public class PlayerController : MonoBehaviour {
 
 
 	private void ChangeWeapon(){
-		if (isChangingWeapon) {
-			return;
-		}
-
-		isChangingWeapon = true;
-
-		if (Input.GetKey("q")) {
-			weaponIndex = 0;
-			ChangeSprite();
-		}
-		if (Input.GetKey("w")) {
-			weaponIndex = 1;
-			ChangeSprite();
-		}
-
 		if (isChangingWeapon)
-			isChangingWeapon = false;
+			return;
+
+		if (changeInputValue){
+			
+			isChangingWeapon = true;
+
+			weaponIndex += 1;
+
+			if (weaponIndex == countOfWeapon) {
+				weaponIndex = 0;
+			}
+
+			ChangeSprite();
+		}
+
 	}
 
 
