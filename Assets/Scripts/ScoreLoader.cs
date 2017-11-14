@@ -8,24 +8,21 @@ public class ScoreLoader : MonoBehaviour {
 
 	public Text lastScoreText, bestScoreText;
 
+
+	private int lastScore, bestScore;
+
 	// Use this for initialization
 	void Awake() {
-		string[] scores = { "0", "0" };
-			
-		try{
-			scores = System.IO.File.ReadAllLines("Score.txt");
-		} catch {
-		
-		}
-		int bestScore = int.Parse(scores[0]);
-		int lastScore = int.Parse(scores[1]);
+
+		LoadScore();
 
 		bestScoreText.text = "Best score\n" + bestScore.ToString();
 		lastScoreText.text = "Last score\n" + lastScore.ToString();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+
+	private void LoadScore(){
+		lastScore = PlayerPrefs.GetInt("LastScore");
+		bestScore = PlayerPrefs.GetInt("BestScore");
 	}
 }

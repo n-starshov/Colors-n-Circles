@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 //using NUnit.Framework.Internal.Filters;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.SocialPlatforms.Impl;
 
 
 public class GameController : MonoBehaviour {
@@ -13,10 +14,13 @@ public class GameController : MonoBehaviour {
 	public static GameController instance = null;
 	public GameObject[] enemiesForSpawn;
 	public int countEnemies;
-	public Vector3 endOfGameBGHealthScale;
+//	public Vector3 endOfGameBGHealthScale;
 	public GameObject stickControll;
+	public int lastScore = 0;
+	public int bestScore = 0;
 
 
+	private int score = 0;
 	private GameObject player; //, backgroundHealth;
 	private Text scoreText;// ,endText;
 	private Color textColor;
@@ -42,7 +46,7 @@ public class GameController : MonoBehaviour {
 
 
 		scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
-		scoreText.text = "0";
+		scoreText.text = score.ToString();
 
 		player = GameObject.FindGameObjectWithTag("Player");
 		player.SetActive(true);
@@ -60,8 +64,14 @@ public class GameController : MonoBehaviour {
 	}
 
 
-	private void SaceScore(){
+
+	private void SaveScore(){
 		
+		PlayerPrefs.SetInt("LastScore", score);
+		int _best = PlayerPrefs.GetInt("BestScore", -1);
+		if (_best == -1 || _best <= score)
+			PlayerPrefs.SetInt("BestScore", score);
+	
 	}
 
 
@@ -90,7 +100,6 @@ public class GameController : MonoBehaviour {
 
 	
 	public void IncreaseTextScore(){
-		int score = int.Parse(scoreText.text);
 		score++;
 		scoreText.text = score.ToString();
 	}
@@ -107,7 +116,6 @@ public class GameController : MonoBehaviour {
 
 
 	public void GameOver(){
-		isGameOver = true;
 		foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Blue")){
 			enemy.SetActive(false);
 		}
@@ -115,26 +123,9 @@ public class GameController : MonoBehaviour {
 			enemy.SetActive(false);
 		}
 
-		// save score to file
-//		#if !UNITY_WEBPLAYER
+		SaveScore();
 
-		string filePath = Application.persistentDataPath + "/Score.txt";
-		string[] scores;
-		try{
-			scores = System.IO.File.ReadAllLines(filePath);
-		} catch {
-			scores = new string[1] {"0"};
-		}
 
-		int bestScore = int.Parse(scores[0]);
-		int currentScore = int.Parse(scoreText.text);
-		if (currentScore > bestScore) {
-			bestScore = currentScore;
-		}
-		System.IO.StreamWriter file = new System.IO.StreamWriter(filePath, true); 
-		file.WriteLine(bestScore + "\n" + currentScore);
-		file.Close();
-
-//		#endif
+		isGameOver = true;
 	}
 }
