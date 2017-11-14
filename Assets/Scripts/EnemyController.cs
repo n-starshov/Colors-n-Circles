@@ -59,7 +59,7 @@ public class EnemyController : MonoBehaviour {
 		if (Vector3.Distance(transform.position, playerTransform.position) > offset) {
 			var pos = playerTransform.position;
 			pos.z = 1;
-			transform.position = Vector3.Lerp(transform.position, pos, speed * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, pos, speed * Time.deltaTime * 10);
 		}
 
 		timer += Time.deltaTime;

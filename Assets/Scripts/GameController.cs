@@ -5,14 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 //using NUnit.Framework.Internal.Filters;
 using System;
+using Random = UnityEngine.Random;
 
 
 public class GameController : MonoBehaviour {
 
-
-	public GameObject[] enemies;
+	public static GameController instance = null;
+	public GameObject[] enemiesForSpawn;
 	public int countEnemies;
 	public Vector3 endOfGameBGHealthScale;
+	public GameObject stickControll;
 
 
 	private GameObject player; //, backgroundHealth;
@@ -23,20 +25,27 @@ public class GameController : MonoBehaviour {
 
 
 	void Awake(){
-//		endText = GameObject.Find("EndText").GetComponent<Text>();
-//		endText.text = "";
-//		var color = endText.color;
-//		color.a = 0.0f;
-//		endText.color = color;
+		if (instance == null)
+			instance = this;
+		else if (instance != this)
+			Destroy(gameObject);
+		
+		#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
+
+		stickControll.SetActive(false);
+
+		#elif UNITY_IOS
+
+		System.Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
+
+		#endif
+
 
 		scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
 		scoreText.text = "0";
 
 		player = GameObject.FindGameObjectWithTag("Player");
 		player.SetActive(true);
-
-//		backgroundHealth = GameObject.Find("BackgroundHealth");
-
 
 		spawnEnemyRandomly(8);
 		isGameOver = false;
@@ -47,19 +56,14 @@ public class GameController : MonoBehaviour {
 		
 		if (isGameOver) {
 			SceneManager.LoadScene("HomeScene");
-//			endText.text = "Score:\n" + scoreText.text;
-//
-//			backgroundHealth.transform.localScale = Vector3.Lerp (backgroundHealth.transform.localScale, endOfGameBGHealthScale, 0.2f * Time.deltaTime);
-//
-//			var color = scoreText.color;
-//			color.a = Mathf.Lerp(color.a, 0.0f, Time.deltaTime);
-//			scoreText.color = color;
-//
-//			color = endText.color;
-//			color.a = Mathf.Lerp(color.a, 1.0f, Time.deltaTime);
-//			endText.color = color; 
 		}
 	}
+
+
+	private void SaceScore(){
+		
+	}
+
 
 
 	public void spawnEnemyRandomly(int count=1){
@@ -75,7 +79,12 @@ public class GameController : MonoBehaviour {
 			enemyPosition.y = (Math.Abs(enemyPosition.y) <= 100 ? (100 * Mathf.Sign(enemyPosition.y)) : enemyPosition.y);
 			enemyPosition.z = 0.0f;
 
-			Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Length)], enemyPosition, UnityEngine.Quaternion.identity);
+//			float min = 0.50f;
+//			float max = 1.50f;
+			GameObject randomEnemy = enemiesForSpawn[UnityEngine.Random.Range(0, enemiesForSpawn.Length)];
+//			randomEnemy.gameObject.transform.localScale *= Random.Range(min, max);
+
+			Instantiate(randomEnemy, enemyPosition, UnityEngine.Quaternion.identity);
 		}
 	}
 
@@ -84,6 +93,16 @@ public class GameController : MonoBehaviour {
 		int score = int.Parse(scoreText.text);
 		score++;
 		scoreText.text = score.ToString();
+	}
+
+
+	public void AddEnemy(EnemyController enemy){
+//		enemiesForSpawn.a(enemy);
+	}
+
+
+	public void EnemyIsDead(EnemyController enemy){
+		
 	}
 
 
@@ -97,7 +116,9 @@ public class GameController : MonoBehaviour {
 		}
 
 		// save score to file
-		string filePath = "Score.txt";
+//		#if !UNITY_WEBPLAYER
+
+		string filePath = Application.persistentDataPath + "/Score.txt";
 		string[] scores;
 		try{
 			scores = System.IO.File.ReadAllLines(filePath);
@@ -110,8 +131,10 @@ public class GameController : MonoBehaviour {
 		if (currentScore > bestScore) {
 			bestScore = currentScore;
 		}
-		System.IO.StreamWriter file = new System.IO.StreamWriter(filePath, true);
+		System.IO.StreamWriter file = new System.IO.StreamWriter(filePath, true); 
 		file.WriteLine(bestScore + "\n" + currentScore);
 		file.Close();
+
+//		#endif
 	}
 }

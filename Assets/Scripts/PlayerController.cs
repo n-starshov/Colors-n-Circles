@@ -70,11 +70,17 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate (){
 		backgroundHealth.transform.localScale = Vector3.Lerp(backgroundHealth.transform.localScale, radius, lerpSpeed * Time.deltaTime);
 
+		#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
+		movementInputValue = Input.GetAxisRaw("Vertical");//CrossPlatformInputManager.GetAxisRaw("Vertical");
+		turnInputValue = Input.GetAxisRaw("Horizontal");
+		fireInputValue = Input.GetButton("Fire");
+		changeInputValue = Input.GetButtonDown("Change");
+		#else
 		movementInputValue = CrossPlatformInputManager.GetAxisRaw("Vertical");
 		turnInputValue = CrossPlatformInputManager.GetAxisRaw("Horizontal");
 		fireInputValue = CrossPlatformInputManager.GetButton("Fire");
 		changeInputValue = CrossPlatformInputManager.GetButtonDown("Change");
-
+		#endif
 		Move();
 		Turn();
 		Fire();
