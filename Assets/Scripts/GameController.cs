@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 		player.SetActive(true);
 
-		spawnEnemyRandomly(8);
+		spawnEnemyRandomly(5);
 		isGameOver = false;
 	}
 
@@ -102,6 +102,9 @@ public class GameController : MonoBehaviour {
 	public void IncreaseTextScore(){
 		score++;
 		scoreText.text = score.ToString();
+
+		if (score % 15 == 0)
+			spawnEnemyRandomly();
 	}
 
 

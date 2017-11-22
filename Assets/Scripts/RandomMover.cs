@@ -26,6 +26,7 @@ public class RandomMover : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 //		Debug.Log(gameObject.name + " collide with " + other.gameObject.name);
+
 		if ((other.gameObject.name == "TopBound") || (other.gameObject.name == "BottomBound")) {
 			Vector3 vel = rb.velocity;
 			vel.y *= -1.0f;
