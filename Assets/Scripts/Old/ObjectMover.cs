@@ -1,21 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ObjectMover : MonoBehaviour {
+public class ObjectMover : MonoBehaviour
+{
+    public GameObject target;
 
+    private Vector3 offset;
 
-	public GameObject target;
+    private void Start()
+    {
+        offset = transform.position - target.transform.position;
+    }
 
-	private Vector3 offset;
-
-	// Use this for initialization
-	void Start () {
-		offset = transform.position - target.transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		transform.position = target.transform.position + offset;
-	}
+    private void LateUpdate()
+    {
+        transform.position = target.transform.position + offset;
+    }
 }
