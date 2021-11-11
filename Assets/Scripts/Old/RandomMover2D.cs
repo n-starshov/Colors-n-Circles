@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RandomMover2D : MonoBehaviour
 {
@@ -10,12 +12,13 @@ public class RandomMover2D : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        var randomDirection = new Vector3(
-            Random.Range(-speed, speed),
-            Random.Range(-speed, speed),
-            0.0f
-        );
-        rb.velocity = randomDirection;
+        rb.velocity =  Random.insideUnitCircle * speed;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        var contact = other.GetContact(0);
+        rb.velocity = contact.normal * rb.velocity.magnitude;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
