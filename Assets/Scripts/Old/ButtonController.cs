@@ -59,19 +59,4 @@ public class ButtonController : MonoBehaviour
         pos.z = 5;
         transform.position = pos;
     }
-    
-    // void OnDrawGizmosSelected()
-    // {
-    //     Camera camera = GetComponent<Camera>();
-    //     Gizmos.color = Color.yellow;
-    //     
-    //     Vector3 p = camera.ViewportToWorldPoint(new Vector3(0, 0, camera.nearClipPlane));
-    //     Gizmos.DrawSphere(p, 0.1F);
-    //     p = camera.ViewportToWorldPoint(new Vector3(0, 1, camera.nearClipPlane));
-    //     Gizmos.DrawSphere(p, 0.1F);
-    //     p = camera.ViewportToWorldPoint(new Vector3(1, 0, camera.nearClipPlane));
-    //     Gizmos.DrawSphere(p, 0.1F);
-    //     p = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
-    //     Gizmos.DrawSphere(p, 0.1F);
-    // }
 }
