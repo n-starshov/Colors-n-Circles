@@ -6,14 +6,12 @@ public class RandomMover2D : MonoBehaviour
 {
     public float speed = 5.0f;
     public float rndKoef = .1f;
-    public Boundary randomPosition;
 
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
     private Vector2 _randomSpeedVector;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         _randomSpeedVector = Random.insideUnitCircle * speed;
         rb.velocity =  _randomSpeedVector;
     }
@@ -22,7 +20,7 @@ public class RandomMover2D : MonoBehaviour
     {
         var contact = other.GetContact(0);
         var randomreflection = Random.insideUnitCircle * rndKoef;
-        var reflect = Vector2.Reflect((rb.velocity + randomreflection).normalized, contact.);
+        var reflect = Vector2.Reflect((rb.velocity + randomreflection).normalized, contact.normal);
         rb.velocity = reflect * _randomSpeedVector.magnitude;
     }
 }

@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ButtonController : MonoBehaviour
+public class ButtonController : CircleContainerBase
 {
     public string sceneToOpen;
     public float lerpSpeed;
-    public Vector3 finalScale;
+    public float finalScale;
     public GameObject textOnButton;
 
     private Vector3 stopScale;
@@ -17,18 +17,19 @@ public class ButtonController : MonoBehaviour
     private void Start()
     {
         isButtonOn = false;
-        stopScale = new Vector3(finalScale.x * 0.75f, finalScale.y * 0.75f, 1);
+        stopScale = new Vector3(finalScale, finalScale, 1f);
         transparencyColor = textOnButton.GetComponent<Text>().color;
         transparencyColor.a = 0.0f;
     }
 
     private void Update()
     {
+        // move animation in dotweenanimator
         if (isButtonOn)
         {
             transform.localScale = Vector3.Lerp(
                 transform.localScale,
-                finalScale,
+                Vector3.one * finalScale,
                 lerpSpeed * Time.deltaTime
             );
 
@@ -41,22 +42,13 @@ public class ButtonController : MonoBehaviour
 
             if (transform.localScale.x >= stopScale.x) isButtonOn = false;
             if (!isButtonOn)
-                try
-                {
-                    SceneManager.LoadScene(sceneToOpen);
-                }
-                catch (Exception e)
-                {
-                    Debug.Log(e.StackTrace);
-                }
+                SceneManager.LoadScene(sceneToOpen);
         }
     }
 
-    private void OnMouseDown()
+    protected override void OnMouseUpAsButton()
     {
+        base.OnMouseUpAsButton();
         isButtonOn = true;
-        var pos = transform.position;
-        pos.z = 5;
-        transform.position = pos;
     }
 }
