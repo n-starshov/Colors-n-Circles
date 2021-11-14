@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Vector3 = UnityEngine.Vector3;
@@ -9,7 +8,7 @@ public class CameraBoundary : MonoBehaviour
 	[SerializeField] private Transform _leftPad;
 	[SerializeField] private Transform _rightPad;
 
-	private void Awake()
+	private void Start()
 	{
 		UpdatePads();
 	}
@@ -23,11 +22,14 @@ public class CameraBoundary : MonoBehaviour
 	
 	private void UpdatePads()
 	{
-		Camera camera = Camera.main;
-		Vector3 p = camera.ViewportToWorldPoint(new Vector3(0, 0.5f, camera.nearClipPlane));
-		_leftPad.position = p + Vector3.left;
-		p = camera.ViewportToWorldPoint(new Vector3(1, 0.5f, camera.nearClipPlane));
-		_rightPad.position = p + Vector3.right;
+		var camera = Camera.main;
+		var safeArea = Screen.safeArea;
+		var l = new Vector3(safeArea.xMin, safeArea.height / 2, 0f);
+		var p = camera.ScreenToWorldPoint(l);
+		_leftPad.position = p + Vector3.left * _leftPad.localScale.x * 0.5f;
+		l = new Vector3(safeArea.xMax, safeArea.height / 2, 0f);
+		p = camera.ScreenToWorldPoint(l);
+		_rightPad.position = p + Vector3.right * _rightPad.localScale.x * 0.5f;
 	}
 
 	void OnDrawGizmosSelected()
