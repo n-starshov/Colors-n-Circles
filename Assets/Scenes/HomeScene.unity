@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 164369097}
   - component: {fileID: 164369096}
   - component: {fileID: 164369095}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: OptionsTitle
   m_TagString: Text
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 391930104}
   - component: {fileID: 391930103}
   - component: {fileID: 391930105}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: GameTitle
   m_TagString: Text
   m_Icon: {fileID: 0}
@@ -439,7 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 403984553}
   - component: {fileID: 403984552}
   - component: {fileID: 403984554}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StartTitle
   m_TagString: Text
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 510798747}
   - component: {fileID: 510798746}
   - component: {fileID: 510798745}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BestScoreTitle
   m_TagString: Text
   m_Icon: {fileID: 0}
@@ -704,7 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1510,7 +1510,7 @@ GameObject:
   - component: {fileID: 1627901185}
   - component: {fileID: 1627901184}
   - component: {fileID: 1627901183}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1746,7 +1746,7 @@ GameObject:
   - component: {fileID: 1722568913}
   - component: {fileID: 1722568912}
   - component: {fileID: 1722568911}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LastScoreTitle
   m_TagString: Text
   m_Icon: {fileID: 0}
@@ -1799,7 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
