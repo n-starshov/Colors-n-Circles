@@ -38,17 +38,18 @@ public class ButtonController : CircleContainerBase
                 transparencyColor,
                 lerpSpeed * Time.deltaTime * 10
             );
-
-
-            if (transform.localScale.x >= stopScale.x) isButtonOn = false;
-            if (!isButtonOn)
-                SceneManager.LoadScene(sceneToOpen);
         }
     }
 
-    protected override void OnMouseUpAsButton()
+    public override void OnMouseDownView()
     {
-        base.OnMouseUpAsButton();
+        base.OnMouseDownView();
+        isButtonOn = false;
+    }
+
+    public override void OnMouseUpAsButtonView()
+    {
         isButtonOn = true;
+        SceneManager.LoadScene(sceneToOpen);
     }
 }

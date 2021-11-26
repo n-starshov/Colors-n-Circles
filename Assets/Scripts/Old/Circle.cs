@@ -12,24 +12,26 @@ public class Circle : MonoBehaviour
     {
         
         _cachedConstraints = _rigidbody.constraints;
-        _container.OnMouseDownEvent += OnMouseDown;
-        _container.OnMouseUpEvent += OnMouseUp;
+        // _container.OnMouseDownEvent += OnMouseDown;
+        // _container.OnMouseUpEvent += OnMouseUp;
     }
 
     private void OnDestroy()
     {
-        _container.OnMouseDownEvent -= OnMouseDown;
-        _container.OnMouseUpEvent -= OnMouseUp;
+        // _container.OnMouseDownEvent -= OnMouseDown;
+        // _container.OnMouseUpEvent -= OnMouseUp;
     }
 
     private void OnMouseDown()
     {
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+        _container.OnMouseDownView();
     }
 
-    private void OnMouseUp()
+    private void OnMouseUpAsButton()
     {
         _rigidbody.constraints = _cachedConstraints;
+        _container.OnMouseUpAsButtonView();
     }
     
     

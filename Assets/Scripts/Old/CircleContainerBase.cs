@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class CircleContainerBase : MonoBehaviour
 {
-    public Action OnMouseDownEvent;
-    public Action OnMouseUpEvent;
+    // public Action OnMouseDownEvent;
+    // public Action OnMouseUpEvent;
 
-    protected virtual void OnMouseDown()
+    public virtual void OnMouseDownView()
     {
-        OnMouseDownEvent?.Invoke();
+        // OnMouseDownEvent?.Invoke();
     }
 
     protected virtual void OnMouseUp()
     {
-        OnMouseUpEvent?.Invoke();
+        // OnMouseUpEvent?.Invoke();
     }
 
-    protected virtual void OnMouseUpAsButton()
+    public virtual void OnMouseUpAsButtonView()
     {
-        OnMouseUpEvent?.Invoke();
+        // OnMouseUpEvent?.Invoke();
     }
 }
