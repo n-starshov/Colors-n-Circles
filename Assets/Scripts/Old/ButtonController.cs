@@ -1,14 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonController : CircleContainerBase
 {
-    public string sceneToOpen;
-    public float lerpSpeed;
-    public float finalScale;
-    public GameObject textOnButton;
+    [SerializeField] private  string sceneToOpen;
+    [SerializeField] private  GameObject textOnButton;
+    [SerializeField] private CircleAnimator _animator;
 
     private Vector3 stopScale;
     private bool isButtonOn;
@@ -17,7 +15,7 @@ public class ButtonController : CircleContainerBase
     private void Start()
     {
         isButtonOn = false;
-        stopScale = new Vector3(finalScale, finalScale, 1f);
+        // stopScale = new Vector3(_finalScale, _finalScale, 1f);
         transparencyColor = textOnButton.GetComponent<Text>().color;
         transparencyColor.a = 0.0f;
     }
@@ -25,20 +23,20 @@ public class ButtonController : CircleContainerBase
     private void Update()
     {
         // move animation in dotweenanimator
-        if (isButtonOn)
-        {
-            transform.localScale = Vector3.Lerp(
-                transform.localScale,
-                Vector3.one * finalScale,
-                lerpSpeed * Time.deltaTime
-            );
-
-            textOnButton.GetComponent<Text>().color = Color.Lerp(
-                textOnButton.GetComponent<Text>().color,
-                transparencyColor,
-                lerpSpeed * Time.deltaTime * 10
-            );
-        }
+        // if (isButtonOn)
+        // {
+        //     transform.localScale = Vector3.Lerp(
+        //         transform.localScale,
+        //         Vector3.one * _finalScale,
+        //         lerpSpeed * Time.deltaTime
+        //     );
+        //
+        //     textOnButton.GetComponent<Text>().color = Color.Lerp(
+        //         textOnButton.GetComponent<Text>().color,
+        //         transparencyColor,
+        //         lerpSpeed * Time.deltaTime * 10
+        //     );
+        // }
     }
 
     public override void OnMouseDownView()
@@ -50,6 +48,11 @@ public class ButtonController : CircleContainerBase
     public override void OnMouseUpAsButtonView()
     {
         isButtonOn = true;
+        _animator.OnAllScreen(OnOpenAnimationComplete);
+    }
+
+    private void OnOpenAnimationComplete()
+    {
         SceneManager.LoadScene(sceneToOpen);
     }
 }

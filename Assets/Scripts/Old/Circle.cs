@@ -28,9 +28,14 @@ public class Circle : MonoBehaviour
         _container.OnMouseDownView();
     }
 
-    private void OnMouseUpAsButton()
+    private void OnMouseUp()
     {
         _rigidbody.constraints = _cachedConstraints;
+    }
+
+    private void OnMouseUpAsButton()
+    {
+        _rigidbody.simulated = false;
         _container.OnMouseUpAsButtonView();
     }
     
