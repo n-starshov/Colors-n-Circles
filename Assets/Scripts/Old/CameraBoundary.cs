@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Vector3 = UnityEngine.Vector3;
@@ -8,8 +9,9 @@ public class CameraBoundary : MonoBehaviour
 	[SerializeField] private Transform _leftPad;
 	[SerializeField] private Transform _rightPad;
 
-	private void Start()
+	private IEnumerator Start()
 	{
+		yield return null;
 		UpdatePads();
 	}
 

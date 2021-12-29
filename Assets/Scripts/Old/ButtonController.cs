@@ -49,6 +49,7 @@ public class ButtonController : CircleContainerBase
     {
         isButtonOn = true;
         _animator.OnAllScreen(OnOpenAnimationComplete);
+        _animator.HideAllExceptMe();
     }
 
     private void OnOpenAnimationComplete()

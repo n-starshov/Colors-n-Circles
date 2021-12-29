@@ -21,6 +21,6 @@ public class RandomMover2D : MonoBehaviour
         var contact = other.GetContact(0);
         var randomreflection = Random.insideUnitCircle * rndKoef;
         var reflect = Vector2.Reflect((rb.velocity + randomreflection).normalized, contact.normal);
-        rb.velocity = reflect * _randomSpeedVector.magnitude;
+        rb.velocity = reflect * _randomSpeedVector.magnitude + (-contact.point.normalized * 0.3f);
     }
 }

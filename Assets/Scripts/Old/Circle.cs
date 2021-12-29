@@ -6,20 +6,12 @@ public class Circle : MonoBehaviour
     [SerializeField] private CircleContainerBase _container;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private Collider2D _collider;
+    [SerializeField] private bool _stopSimOnClick;
     private RigidbodyConstraints2D _cachedConstraints;
 
     private void Awake()
     {
-        
         _cachedConstraints = _rigidbody.constraints;
-        // _container.OnMouseDownEvent += OnMouseDown;
-        // _container.OnMouseUpEvent += OnMouseUp;
-    }
-
-    private void OnDestroy()
-    {
-        // _container.OnMouseDownEvent -= OnMouseDown;
-        // _container.OnMouseUpEvent -= OnMouseUp;
     }
 
     private void OnMouseDown()
@@ -35,8 +27,9 @@ public class Circle : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        _rigidbody.simulated = false;
         _container.OnMouseUpAsButtonView();
+        if(_stopSimOnClick)
+            _rigidbody.simulated = false;
     }
     
     
