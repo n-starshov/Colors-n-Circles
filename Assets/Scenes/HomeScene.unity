@@ -871,8 +871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c3268038d747499aa8c873d55d2707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animationDuration: 3
-  _finalScale: 1
+  _animationDuration: 1
+  _finalScale: 0
   _canvasGroup: {fileID: 510798748}
 --- !u!212 &1055059427
 SpriteRenderer:
@@ -1086,8 +1086,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c3268038d747499aa8c873d55d2707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animationDuration: 3
-  _finalScale: 1
+  _animationDuration: 1
+  _finalScale: 0
   _canvasGroup: {fileID: 1722568914}
 --- !u!212 &1370285103
 SpriteRenderer:
@@ -1502,8 +1502,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c3268038d747499aa8c873d55d2707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animationDuration: 5
-  _finalScale: 20
+  _animationDuration: 4
+  _finalScale: 50
   _canvasGroup: {fileID: 403984555}
 --- !u!1 &1627901181
 GameObject:
@@ -1999,8 +1999,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c3268038d747499aa8c873d55d2707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animationDuration: 3
-  _finalScale: 1
+  _animationDuration: 1
+  _finalScale: 0
   _canvasGroup: {fileID: 391930106}
 --- !u!1 &2034677395
 GameObject:

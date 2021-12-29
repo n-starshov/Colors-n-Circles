@@ -34,16 +34,17 @@ public class CircleAnimator : MonoBehaviour
         RefreshTween();
         
         var finalScale = CncHelper.GetScreenDiagonal() + Mathf.Abs(transform.position.magnitude);
-        _animation.Insert(0, transform.DOScale(Vector3.one * finalScale, _animationDuration));
+        _animation.Append(transform.DOScale(Vector3.one * finalScale, _animationDuration));
+        _animation.Insert(_animationDuration / 5, _canvasGroup.DOFade(0, _animationDuration / 2));
         _animation.OnComplete(() => onComplete?.Invoke());
         _animation.Play();
     }
 
-    public void Hide()
+    private void Hide()
     {
         RefreshTween();
 
-        _animation.Append(_canvasGroup.DOFade(0, _animationDuration));
+        _animation.Append(_canvasGroup.DOFade(0, _animationDuration / 2));
         _animation.Insert(_animationDuration / 5, transform.DOScale(Vector3.zero, _animationDuration));
         _animation.Play();
     }
